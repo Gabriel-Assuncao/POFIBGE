@@ -9,7 +9,7 @@ pof_labeller(data_pof, dictionary.file)
 \arguments{
 \item{data_pof}{A tibble of POF microdata read with \code{read_pof} function.}
 
-\item{dictionary.file}{The dictionary file for selected survey available on official website: (select the dictionary and input zip file, according to the appropriated select the dictionary and input zip file, according to the appropriated year, microdata folder and then, inside, documentation) - ftp://ftp.ibge.gov.br/POF/.}
+\item{dictionary.file}{The dictionary file for selected survey available on official website: (select the dictionary and input zip file, according to the appropriated select the dictionary and input zip file, according to the appropriated year, microdata folder and then, inside, documentation) - \url{https://ftp.ibge.gov.br/Orcamentos_Familiares/}.}
 }
 \value{
 A tibble with the data provided from POF survey and its categorical variables as factors with related labels.

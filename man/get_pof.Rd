@@ -22,7 +22,7 @@ get_pof(
 
 \item{anthropometry}{Logical value. If \code{TRUE}, the specific questionnaire for the anthropometry module of the selected resident will be used. If \code{FALSE}, the questionnaire defined by the argument \code{selected} of this function will be used. This argument will be used only if \code{year} is equal to 2017.}
 
-\item{vars}{Vector of variable names to be kept for analysys. Default is to keep all variables.}
+\item{vars}{Vector of variable names to be kept for analysis. Default is to keep all variables.}
 
 \item{labels}{Logical value. If \code{TRUE}, categorical variables will presented as factors with labels corresponding to the survey's dictionary.}
 
@@ -45,13 +45,13 @@ For more information, visit the survey official website <\url{https://www.ibge.g
 \donttest{
 pof.svy <- get_pof(year=2017, selected=FALSE, anthropometry=FALSE, vars=c("V0406","V0407","V0408"),
                        labels=TRUE, deflator=TRUE, design=TRUE, savedir=tempdir())
-survey::svymean(x=~V0408, design=pof.svy, na.rm=TRUE)
+if (!is.null(pof.svy)) survey::svymean(x=~V0408, design=pof.svy, na.rm=TRUE)
 pof.svy2 <- get_pof(year=2017, selected=TRUE, anthropometry=FALSE, vars=c("V4104","V4105"),
                        labels=TRUE, deflator=TRUE, design=TRUE, savedir=tempdir())
-survey::svymean(x=~V4104, design=pof.svy2, na.rm=TRUE)
+if (!is.null(pof.svy2)) survey::svymean(x=~V4104, design=pof.svy2, na.rm=TRUE)
 pof.svy3 <- get_pof(year=2017, selected=FALSE, anthropometry=TRUE, vars=c("V4104","V4105"),
                        labels=TRUE, deflator=TRUE, design=TRUE, savedir=tempdir())
-survey::svymean(x=~V4104, design=pof.svy3, na.rm=TRUE)}
+if (!is.null(pof.svy3)) survey::svymean(x=~V4104, design=pof.svy3, na.rm=TRUE)}
 }
 \seealso{
 \link[POFIBGE]{read_pof} for reading POF microdata.\cr \link[POFIBGE]{pof_labeller} for labelling categorical variables from POF microdata.\cr \link[POFIBGE]{pof_deflator} for adding deflator variable to POF microdata.\cr \link[POFIBGE]{pof_design} for creating POF survey design object.\cr \link[POFIBGE]{pof_example} for getting the path of the POF example files.

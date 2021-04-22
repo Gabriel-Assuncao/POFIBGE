@@ -31,14 +31,14 @@ pof.df <- pof_deflator(data_pof=pof.df, deflator.file=deflator.path)}
 \donttest{
 pof.svy <- pof_design(data_pof=pof.df)
 # Calculating expenses or acquisitions rate
-survey::svymean(x=~V0408, design=pof.svy, na.rm=TRUE)}
+if (!is.null(pof.svy)) survey::svymean(x=~V0408, design=pof.svy, na.rm=TRUE)}
 \donttest{
 # Downloading data
 pof.df2 <- get_pof(year=2017, selected=FALSE, anthropometry=FALSE, vars="V0408",
                        labels=TRUE, deflator=TRUE, design=FALSE, savedir=tempdir())
 pof.svy2 <- pof_design(data_pof=pof.df2)
 # Calculating expenses or acquisitions rate
-survey::svymean(x=~V0408, design=pof.svy2, na.rm=TRUE)}
+if (!is.null(pof.svy2)) survey::svymean(x=~V0408, design=pof.svy2, na.rm=TRUE)}
 }
 \seealso{
 \link[POFIBGE]{get_pof} for downloading, labelling, deflating and creating survey design object for POF microdata.\cr \link[POFIBGE]{read_pof} for reading POF microdata.\cr \link[POFIBGE]{pof_labeller} for labelling categorical variables from POF microdata.\cr \link[POFIBGE]{pof_deflator} for adding deflator variable to POF microdata.\cr \link[POFIBGE]{pof_example} for getting the path of the POF example files.

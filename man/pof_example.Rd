@@ -13,7 +13,7 @@ pof_example(path = NULL)
 A vector with names of all the available POF example files or the path for specific requested POF example file.
 }
 \description{
-This function provides the path of the POF example files, loaded with this package.
+This function provides the path of the microdata from year 2017-2018 of the POF example files, loaded with this package.
 }
 \note{
 For more information, visit the survey official website <\url{https://www.ibge.gov.br/estatisticas/sociais/trabalho/9050-pesquisa-de-orcamentos-familiares.html?=&t=o-que-e}> and consult the other functions of this package, described below.

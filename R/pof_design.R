@@ -1,6 +1,6 @@
 #' Create POF survey object with its sample design
 #' @description This function creates POF survey object with its sample design for analysis using \code{survey} package functions.
-#' @import survey readr dplyr magrittr RCurl utils timeDate readxl tibble
+#' @import survey readr dplyr magrittr projmgr httr RCurl utils timeDate readxl tibble
 #' @param data_pof A tibble of POF microdata read with \code{read_pof} function.
 #' @return An object of class \code{survey.design} with the data from POF and its sample design.
 #' @note For more information, visit the survey official website <\url{https://www.ibge.gov.br/estatisticas/sociais/trabalho/9050-pesquisa-de-orcamentos-familiares.html?=&t=o-que-e}> and consult the other functions of this package, described below.
@@ -18,18 +18,19 @@
 #' \donttest{
 #' pof.svy <- pof_design(data_pof=pof.df)
 #' # Calculating expenses or acquisitions rate
-#' survey::svymean(x=~V0408, design=pof.svy, na.rm=TRUE)}
+#' if (!is.null(pof.svy)) survey::svymean(x=~V0408, design=pof.svy, na.rm=TRUE)}
 #' \donttest{
 #' # Downloading data
 #' pof.df2 <- get_pof(year=2017, selected=FALSE, anthropometry=FALSE, vars="V0408",
 #'                        labels=TRUE, deflator=TRUE, design=FALSE, savedir=tempdir())
 #' pof.svy2 <- pof_design(data_pof=pof.df2)
 #' # Calculating expenses or acquisitions rate
-#' survey::svymean(x=~V0408, design=pof.svy2, na.rm=TRUE)}
+#' if (!is.null(pof.svy2)) survey::svymean(x=~V0408, design=pof.svy2, na.rm=TRUE)}
 #' @export
 
 pof_design <- function(data_pof) {
-  stop("The pof_design function is under development and will be available soon in package POFIBGE.")
+  message("The pof_design function is under development and will be available soon in package POFIBGE.")
+  return(NULL)
   if (sum(class(data_pof) == "tbl_df") > 0) {
     if (!(FALSE %in% (c("UPA_POF", "V0024", "V0028", "V00282", "V00283") %in% names(data_pof))) |
         !(FALSE %in% (c("UPA_POF", "V0024", "V0029", "V00292", "V00293") %in% names(data_pof))) |
@@ -55,12 +56,12 @@ pof_design <- function(data_pof) {
       }
     }
     else {
-      warning("Weight variables required for sample design are missing.")
+      message("Weight variables required for sample design are missing.")
       data_posterior <- data_pof
     }
   }
   else {
-    warning("Sample design was already defined for microdata, so applying another design is not possible.")
+    message("The microdata object is not of the tibble class or sample design was already defined for microdata, so applying another design is not possible.")
     data_posterior <- data_pof
   }
   return(data_posterior)

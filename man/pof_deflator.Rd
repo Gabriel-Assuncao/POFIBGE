@@ -9,13 +9,13 @@ pof_deflator(data_pof, deflator.file)
 \arguments{
 \item{data_pof}{A tibble of POF microdata read with \code{read_pof} function.}
 
-\item{deflator.file}{The deflator file for selected survey available on official website: (select the deflator zip file) - ftp://ftp.ibge.gov.br/POF/Documentacao_Geral/.}
+\item{deflator.file}{The deflator file for selected survey available on official website: (select the deflator zip file at the general documentation folder) - \url{https://ftp.ibge.gov.br/Orcamentos_Familiares/}.}
 }
 \value{
 A tibble with the data provided from POF survey and the deflator variable added for use.
 }
 \description{
-This function adds deflator variable to POF microdata. For deflation of income variables, the documentation provided through the following address must be used: ftp://ftp.ibge.gov.br/POF/Documentacao_Geral/POFIBGE_Deflator.pdf.
+This function adds deflator variable to POF microdata. For deflation of income variables, the documentation provided through the following address must be used: (see the file 'POFIBGE_Deflator.pdf' at the general documentation folder) \url{https://ftp.ibge.gov.br/Orcamentos_Familiares/}.
 }
 \note{
 For more information, visit the survey official website <\url{https://www.ibge.gov.br/estatisticas/sociais/trabalho/9050-pesquisa-de-orcamentos-familiares.html?=&t=o-que-e}> and consult the other functions of this package, described below.
