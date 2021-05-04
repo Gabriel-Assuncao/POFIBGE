@@ -26,11 +26,11 @@ For more information, visit the survey official website <\url{https://www.ibge.g
 input_path <- pof_example(path="input_example.txt")
 data_path <- pof_example(path="exampledata.txt")
 dictionary.path <- pof_example(path="dictionaryexample.xls")
-pof.df <- read_pof(microdata=data_path, input_txt=input_path, vars="V0408")
+pof.df <- read_pof(microdata=data_path, input_txt=input_path, vars=c("V0407","V0408"))
 pof.df <- pof_labeller(data_pof=pof.df, dictionary.file=dictionary.path)}
 \donttest{
 # Downloading data
-pof.df2 <- get_pof(year=2017, selected=FALSE, anthropometry=FALSE, vars="V0408",
+pof.df2 <- get_pof(year=2017, selected=FALSE, anthropometry=FALSE, vars=c("V0407","V0408"),
                        labels=FALSE, deflator=FALSE, design=FALSE, savedir=tempdir())
 dictionary.path2 <- pof_example(path="dictionaryexample.xls")
 pof.df2 <- pof_labeller(data_pof=pof.df2, dictionary.file=dictionary.path2)}

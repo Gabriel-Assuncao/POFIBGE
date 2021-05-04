@@ -11,7 +11,7 @@
 #' \donttest{
 #' input_path <- pof_example(path="input_example.txt")
 #' data_path <- pof_example(path="exampledata.txt")
-#' pof.df <- read_pof(microdata=data_path, input_txt=input_path, vars="V0408")}
+#' pof.df <- read_pof(microdata=data_path, input_txt=input_path, vars=c("V0407","V0408"))}
 #' @export
 
 read_pof <- function(microdata, input_txt, vars = NULL) {

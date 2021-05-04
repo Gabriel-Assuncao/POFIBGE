@@ -14,15 +14,18 @@
 #' @seealso \link[POFIBGE]{read_pof} for reading POF microdata.\cr \link[POFIBGE]{pof_labeller} for labelling categorical variables from POF microdata.\cr \link[POFIBGE]{pof_deflator} for adding deflator variable to POF microdata.\cr \link[POFIBGE]{pof_design} for creating POF survey design object.\cr \link[POFIBGE]{pof_example} for getting the path of the POF example files.
 #' @examples
 #' \donttest{
-#' pof.svy <- get_pof(year=2017, selected=FALSE, anthropometry=FALSE, vars=c("V0406","V0407","V0408"),
+#' pof.svy <- get_pof(year=2017, selected=FALSE, anthropometry=FALSE, vars=c("V0407","V0408"),
 #'                        labels=TRUE, deflator=TRUE, design=TRUE, savedir=tempdir())
+#' # Calculating proportion of people's purchase of goods or services
 #' if (!is.null(pof.svy)) survey::svymean(x=~V0408, design=pof.svy, na.rm=TRUE)
 #' pof.svy2 <- get_pof(year=2017, selected=TRUE, anthropometry=FALSE, vars=c("V4104","V4105"),
 #'                        labels=TRUE, deflator=TRUE, design=TRUE, savedir=tempdir())
+#' # Calculating proportion of reasons for non-routine trips indicated by people
 #' if (!is.null(pof.svy2)) survey::svymean(x=~V4104, design=pof.svy2, na.rm=TRUE)
-#' pof.svy3 <- get_pof(year=2017, selected=FALSE, anthropometry=TRUE, vars=c("V4104","V4105"),
+#' pof.svy3 <- get_pof(year=2017, selected=FALSE, anthropometry=TRUE, vars=c("V7102","V7104"),
 #'                        labels=TRUE, deflator=TRUE, design=TRUE, savedir=tempdir())
-#' if (!is.null(pof.svy3)) survey::svymean(x=~V4104, design=pof.svy3, na.rm=TRUE)}
+#' # Calculating proportion of people who followed some type of diet
+#' if (!is.null(pof.svy3)) survey::svymean(x=~V7104, design=pof.svy3, na.rm=TRUE)}
 #' @export
 
 get_pof <- function(year, selected = FALSE, anthropometry = FALSE, vars = NULL,
@@ -50,28 +53,32 @@ get_pof <- function(year, selected = FALSE, anthropometry = FALSE, vars = NULL,
   else {
     pofyear = ""
   }
-  ftpdir <- paste0("ftp://ftp.ibge.gov.br/Orcamentos_Familiares/Pesquisa_de_Orcamentos_Familiares_", pofyear, "/Microdados/")
+  ftpdir <- paste0("https://ftp.ibge.gov.br/Orcamentos_Familiares/Pesquisa_de_Orcamentos_Familiares_", pofyear, "/Microdados/")
   if (!projmgr::check_internet()) {
     message("The internet connection is unavailable.")
     return(NULL)
   }
-  if (httr::http_error(GET(ftpdir, timeout(60)))) {
+  if (httr::http_error(httr::GET(ftpdir, httr::timeout(60)))) {
     message("The microdata server is unavailable.")
     return(NULL)
   }
+  options(timeout=max(300, getOption("timeout")))
   ftpdata <- paste0(ftpdir, "Dados/")
-  datayear <- unlist(strsplit(gsub("\r\n", "\n", RCurl::getURL(ftpdata, dirlistonly=TRUE)), "\n"))
+  datayear <- unlist(strsplit(unlist(strsplit(unlist(strsplit(gsub("\r\n", "\n", RCurl::getURL(ftpdata, dirlistonly=TRUE)), "\n")), "<a href=[[:punct:]]")), ".zip"))
   dataname <- datayear[which(startsWith(datayear, paste0("POF_", year)))]
   if (length(dataname) == 0) {
     message("Data unavailable for selected year.")
     return(NULL)
   }
-  docfiles <- unlist(strsplit(gsub("\r\n", "\n", RCurl::getURL(paste0(ftpdir, "Documentacao/"), dirlistonly=TRUE)), "\n"))
-  inputzip <- docfiles[which(startsWith(docfiles, "Dicionario_e_input"))]
-  utils::download.file(url=paste0(ftpdir, "Documentacao/", inputzip), destfile=paste0(savedir, "/Dicionario_e_input.zip"), mode="wb")
-  utils::unzip(zipfile=paste0(savedir, "/Dicionario_e_input.zip"), exdir=savedir)
+  else {
+    dataname <- paste0(dataname, ".zip")
+  }
   utils::download.file(url=paste0(ftpdata, dataname), destfile=paste0(savedir, "/", dataname), mode="wb")
   utils::unzip(zipfile=paste0(savedir, "/", dataname), exdir=savedir)
+  docfiles <- unlist(strsplit(unlist(strsplit(unlist(strsplit(gsub("\r\n", "\n", RCurl::getURL(paste0(ftpdir, "Documentacao/"), dirlistonly=TRUE)), "\n")), "<a href=[[:punct:]]")), ".zip"))
+  inputzip <- paste0(docfiles[which(startsWith(docfiles, "Dicionario_e_input"))], ".zip")
+  utils::download.file(url=paste0(ftpdir, "Documentacao/", inputzip), destfile=paste0(savedir, "/Dicionario_e_input.zip"), mode="wb")
+  utils::unzip(zipfile=paste0(savedir, "/Dicionario_e_input.zip"), exdir=savedir)
   microdataname <- dir(savedir, pattern=paste0("^POF_", year, ".*\\.txt$"), ignore.case=FALSE)
   microdatafile <- paste0(savedir, "/", microdataname)
   microdatafile <- rownames(file.info(microdatafile)[order(file.info(microdatafile)$ctime),])[length(microdatafile)]
@@ -109,9 +116,9 @@ get_pof <- function(year, selected = FALSE, anthropometry = FALSE, vars = NULL,
   }
   if (deflator == TRUE) {
     if (exists("pof_deflator", where="package:POFIBGE", mode="function")) {
-      ftpdef <- ("ftp://ftp.ibge.gov.br/Orcamentos_Familiares/")
-      deffiles <- unlist(strsplit(gsub("\r\n", "\n", RCurl::getURL(paste0(ftpdef, "Documentacao_Geral/"), dirlistonly=TRUE)), "\n"))
-      defzip <- deffiles[which(startsWith(deffiles, "Deflatores"))]
+      ftpdef <- ("https://ftp.ibge.gov.br/Orcamentos_Familiares/")
+      deffiles <- unlist(strsplit(unlist(strsplit(unlist(strsplit(gsub("\r\n", "\n", RCurl::getURL(paste0(ftpdef, "Documentacao_Geral/"), dirlistonly=TRUE)), "\n")), "<a href=[[:punct:]]")), ".zip"))
+      defzip <- paste0(deffiles[which(startsWith(deffiles, "Deflatores"))], ".zip")
       utils::download.file(url=paste0(ftpdef, "Documentacao_Geral/", defzip), destfile=paste0(savedir, "/Deflatores.zip"), mode="wb")
       utils::unzip(zipfile=paste0(savedir, "/Deflatores.zip"), exdir=savedir)
       defname <- dir(savedir, pattern=paste0("^deflator_POF.*\\.xls$"), ignore.case=FALSE)

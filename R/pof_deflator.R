@@ -1,5 +1,5 @@
 #' Add deflator variable to POF microdata
-#' @description This function adds deflator variable to POF microdata. For deflation of income variables, the documentation provided through the following address must be used: (see the file 'POFIBGE_Deflator.pdf' at the general documentation folder) \url{https://ftp.ibge.gov.br/Orcamentos_Familiares/}.
+#' @description This function adds deflator variable to POF microdata. For deflation of income variables, the documentation provided through the following address must be used: (see the file 'POFIBGE_Deflator.pdf' at the general documentation folder) - \url{https://ftp.ibge.gov.br/Orcamentos_Familiares/}.
 #' @import survey readr dplyr magrittr projmgr httr RCurl utils timeDate readxl tibble
 #' @param data_pof A tibble of POF microdata read with \code{read_pof} function.
 #' @param deflator.file The deflator file for selected survey available on official website: (select the deflator zip file at the general documentation folder) - \url{https://ftp.ibge.gov.br/Orcamentos_Familiares/}.
@@ -13,12 +13,12 @@
 #' data_path <- pof_example(path="exampledata.txt")
 #' dictionary.path <- pof_example(path="dictionaryexample.xls")
 #' deflator.path <- pof_example(path="deflatorexample.xls")
-#' pof.df <- read_pof(microdata=data_path, input_txt=input_path, vars="V0408")
+#' pof.df <- read_pof(microdata=data_path, input_txt=input_path, vars=c("V0407","V0408"))
 #' pof.df <- pof_labeller(data_pof=pof.df, dictionary.file=dictionary.path)
 #' pof.df <- pof_deflator(data_pof=pof.df, deflator.file=deflator.path)}
 #' \donttest{
 #' # Downloading data
-#' pof.df2 <- get_pof(year=2017, selected=FALSE, anthropometry=FALSE, vars="V0408",
+#' pof.df2 <- get_pof(year=2017, selected=FALSE, anthropometry=FALSE, vars=c("V0407","V0408"),
 #'                        labels=TRUE, deflator=FALSE, design=FALSE, savedir=tempdir())
 #' deflator.path2 <- pof_example(path="deflatorexample.xls")
 #' pof.df2 <- pof_deflator(data_pof=pof.df2, deflator.file=deflator.path2)}

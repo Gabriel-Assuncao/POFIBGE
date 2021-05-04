@@ -43,15 +43,18 @@ For more information, visit the survey official website <\url{https://www.ibge.g
 }
 \examples{
 \donttest{
-pof.svy <- get_pof(year=2017, selected=FALSE, anthropometry=FALSE, vars=c("V0406","V0407","V0408"),
+pof.svy <- get_pof(year=2017, selected=FALSE, anthropometry=FALSE, vars=c("V0407","V0408"),
                        labels=TRUE, deflator=TRUE, design=TRUE, savedir=tempdir())
+# Calculating proportion of people's purchase of goods or services
 if (!is.null(pof.svy)) survey::svymean(x=~V0408, design=pof.svy, na.rm=TRUE)
 pof.svy2 <- get_pof(year=2017, selected=TRUE, anthropometry=FALSE, vars=c("V4104","V4105"),
                        labels=TRUE, deflator=TRUE, design=TRUE, savedir=tempdir())
+# Calculating proportion of reasons for non-routine trips indicated by people
 if (!is.null(pof.svy2)) survey::svymean(x=~V4104, design=pof.svy2, na.rm=TRUE)
-pof.svy3 <- get_pof(year=2017, selected=FALSE, anthropometry=TRUE, vars=c("V4104","V4105"),
+pof.svy3 <- get_pof(year=2017, selected=FALSE, anthropometry=TRUE, vars=c("V7102","V7104"),
                        labels=TRUE, deflator=TRUE, design=TRUE, savedir=tempdir())
-if (!is.null(pof.svy3)) survey::svymean(x=~V4104, design=pof.svy3, na.rm=TRUE)}
+# Calculating proportion of people who followed some type of diet
+if (!is.null(pof.svy3)) survey::svymean(x=~V7104, design=pof.svy3, na.rm=TRUE)}
 }
 \seealso{
 \link[POFIBGE]{read_pof} for reading POF microdata.\cr \link[POFIBGE]{pof_labeller} for labelling categorical variables from POF microdata.\cr \link[POFIBGE]{pof_deflator} for adding deflator variable to POF microdata.\cr \link[POFIBGE]{pof_design} for creating POF survey design object.\cr \link[POFIBGE]{pof_example} for getting the path of the POF example files.

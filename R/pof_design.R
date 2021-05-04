@@ -12,19 +12,19 @@
 #' data_path <- pof_example(path="exampledata.txt")
 #' dictionary.path <- pof_example(path="dictionaryexample.xls")
 #' deflator.path <- pof_example(path="deflatorexample.xls")
-#' pof.df <- read_pof(microdata=data_path, input_txt=input_path, vars="V0408")
+#' pof.df <- read_pof(microdata=data_path, input_txt=input_path, vars=c("V0407","V0408"))
 #' pof.df <- pof_labeller(data_pof=pof.df, dictionary.file=dictionary.path)
 #' pof.df <- pof_deflator(data_pof=pof.df, deflator.file=deflator.path)}
 #' \donttest{
 #' pof.svy <- pof_design(data_pof=pof.df)
-#' # Calculating expenses or acquisitions rate
+#' # Calculating proportion of people's purchase of goods or services
 #' if (!is.null(pof.svy)) survey::svymean(x=~V0408, design=pof.svy, na.rm=TRUE)}
 #' \donttest{
 #' # Downloading data
-#' pof.df2 <- get_pof(year=2017, selected=FALSE, anthropometry=FALSE, vars="V0408",
+#' pof.df2 <- get_pof(year=2017, selected=FALSE, anthropometry=FALSE, vars=c("V0407","V0408"),
 #'                        labels=TRUE, deflator=TRUE, design=FALSE, savedir=tempdir())
 #' pof.svy2 <- pof_design(data_pof=pof.df2)
-#' # Calculating expenses or acquisitions rate
+#' # Calculating proportion of people's purchase of goods or services
 #' if (!is.null(pof.svy2)) survey::svymean(x=~V0408, design=pof.svy2, na.rm=TRUE)}
 #' @export
 
