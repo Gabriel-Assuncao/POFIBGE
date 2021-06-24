@@ -1,12 +1,12 @@
-bd8fce1d34c34b08cacd8b858e619937 *DESCRIPTION
+fe1874415aeb539aa8fbe8fec7b17bea *DESCRIPTION
 c24b3b9ed07c03a09c7583616e94d9aa *NAMESPACE
 95c59e93892f539315f920eb6b3625db *R/example.R
-cd0d427a909a7ddfbb5283e03585c539 *R/get_pof.R
+1ffff87ca4495e44cf841d8add077e8f *R/get_pof.R
 d92fc95a1eded64ce08eb7529632b995 *R/pof_deflator.R
 e28fcc8c6505ea726ac789067408a10a *R/pof_design.R
 c7425b48b461e1ecb556f7ff3e0d9de4 *R/pof_labeller.R
 de0f78dc95e77215d9115d3dd53b4d01 *R/read_pof.R
-1210eb8ad4e943551c322c1f6dc16da3 *README.md
+a347942a38472ab66a8039cbcb149639 *README.md
 e1581ed83835707b1bce53c028a4fbe3 *inst/extdata/deflatorexample.xls
 ae8eeb08b3b02211962383ab0ed04098 *inst/extdata/dictionaryexample.xls
 addbd7edf3a1df3d7b722fdbfd55c7a3 *inst/extdata/exampledata.txt
