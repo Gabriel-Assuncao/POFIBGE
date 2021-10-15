@@ -15,7 +15,8 @@
 #' @export
 
 pof_example <- function(path = NULL) {
-  stop("The pof_example function is under development and will be available soon in package POFIBGE.")
+  message("The pof_example function is under development and will be available soon in package POFIBGE.")
+  return(NULL)
   if (is.null(path)) {
     dir(system.file("extdata", package="POFIBGE"))
   }

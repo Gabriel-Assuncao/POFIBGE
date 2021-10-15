@@ -32,26 +32,27 @@ pof_design <- function(data_pof) {
   message("The pof_design function is under development and will be available soon in package POFIBGE.")
   return(NULL)
   if (sum(class(data_pof) == "tbl_df") > 0) {
-    if (!(FALSE %in% (c("UPA_POF", "V0024", "V0028", "V00282", "V00283") %in% names(data_pof))) |
-        !(FALSE %in% (c("UPA_POF", "V0024", "V0029", "V00292", "V00293") %in% names(data_pof))) |
-        !(FALSE %in% (c("UPA_POF", "V0024", "V0030", "V00302", "V00303") %in% names(data_pof)))) {
+    if (!(FALSE %in% (c("UPA_POF", "ID_DOMICILIO", "V0024", "V0028", "V00281", "V00282", "V00283") %in% names(data_pof))) |
+        !(FALSE %in% (c("UPA_POF", "ID_DOMICILIO", "V0024", "V0029", "V00291", "V00292", "V00293") %in% names(data_pof))) |
+        !(FALSE %in% (c("UPA_POF", "ID_DOMICILIO", "V0024", "V0030", "V00301", "V00302", "V00303") %in% names(data_pof)))) {
       options(survey.lonely.psu="adjust")
-      if (!(FALSE %in% (c("UPA_POF", "V0024", "V0028", "V00282", "V00283") %in% names(data_pof)))) {
+      options(survey.adjust.domain.lonely=TRUE)
+      if (!(FALSE %in% (c("UPA_POF", "ID_DOMICILIO", "V0024", "V0028", "V00281", "V00282", "V00283") %in% names(data_pof)))) {
         data_prior <- survey::svydesign(ids=~UPA_POF, strata=~V0024, data=data_pof, weights=~V0028, nest=TRUE)
         popc.types <- data.frame(V00283=as.character(unique(data_pof$V00283)), Freq=as.numeric(unique(data_pof$V00282)))
-        popc.types <- (popc.types[order(popc.types$V00283),])
+        popc.types <- popc.types[order(popc.types$V00283),]
         data_posterior <- survey::postStratify(design=data_prior, strata=~V00283, population=popc.types)
       }
-      else if (!(FALSE %in% (c("UPA_POF", "V0024", "V0029", "V00292", "V00293") %in% names(data_pof)))) {
+      else if (!(FALSE %in% (c("UPA_POF", "ID_DOMICILIO", "V0024", "V0029", "V00291", "V00292", "V00293") %in% names(data_pof)))) {
         data_prior <- survey::svydesign(ids=~UPA_POF, strata=~V0024, data=data_pof, weights=~V0029, nest=TRUE)
         popc.types <- data.frame(V00293=as.character(unique(data_pof$V00293)), Freq=as.numeric(unique(data_pof$V00292)))
-        popc.types <- (popc.types[order(popc.types$V00293),])
+        popc.types <- popc.types[order(popc.types$V00293),]
         data_posterior <- survey::postStratify(design=data_prior, strata=~V00293, population=popc.types)
       }
       else {
         data_prior <- survey::svydesign(ids=~UPA_POF, strata=~V0024, data=data_pof, weights=~V0030, nest=TRUE)
         popc.types <- data.frame(V00303=as.character(unique(data_pof$V00303)), Freq=as.numeric(unique(data_pof$V00302)))
-        popc.types <- (popc.types[order(popc.types$V00303),])
+        popc.types <- popc.types[order(popc.types$V00303),]
         data_posterior <- survey::postStratify(design=data_prior, strata=~V00303, population=popc.types)
       }
     }

@@ -25,10 +25,11 @@ read_pof <- function(microdata, input_txt, vars = NULL) {
       missvar <- vars[!(vars %in% input$X2)]
       message(paste("Variables", paste(missvar, collapse=", "), "not present in microdata.\n"))
     }
-    input %<>% subset(X2 %in% c("V0001", "UPA_POF", "V0006_POF", "V0015", "V0020", "V0024", "V0028", "V00282", "V00283", "V0029", "V00292", "V00293", "V0030", "V00302", "V00303", "C00301", "M001", "W001", vars))
+    input %<>% subset(X2 %in% c("V0001", "UPA_POF", "ID_DOMICILIO", "V0006_POF", "V0015", "V0020", "V0024", "V0028", "V00281", "V00282", "V00283", "V0029", "V00291", "V00292", "V00293", "V0030", "V00301", "V00302", "V00303", "C00301", "M001", "W001", vars))
   }
   columns <- input %$% readr::fwf_positions(start, end, X2)
   data_pof <- suppressWarnings(readr::read_fwf(microdata, columns, col_types=paste0(input$type, collapse="")))
+  data_pof <- dplyr::mutate(data_pof, ID_DOMICILIO=paste0(data_pof$UPA_POF, data_pof$V0006_POF))
   data_pof <- data_pof[(data_pof$V0015 == "01" & !is.na(data_pof$V0015)),]
   return(data_pof)
 }

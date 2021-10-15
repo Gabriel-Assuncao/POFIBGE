@@ -37,7 +37,7 @@ pof_deflator <- function(data_pof, deflator.file) {
         levels(deflator$V0001) <- levels(as.factor(data_pof$V0001))
       }
       data_pof <- base::merge(x=data_pof, y=deflator, by.x=c("V0020", "V0001"), by.y=c("V0020", "V0001"), all.x=TRUE, all.y=FALSE)
-      data_pof <- data_pof[order(data_pof$V0024, data_pof$UPA_POF, data_pof$V0006_POF, data_pof$C00301),]
+      data_pof <- data_pof[order(data_pof$V0024, data_pof$ID_DOMICILIO, data_pof$C00301),]
       data_pof <- tibble::as_tibble(data_pof)
     }
     else {
