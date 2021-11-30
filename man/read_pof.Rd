@@ -29,5 +29,5 @@ data_path <- pof_example(path="exampledata.txt")
 pof.df <- read_pof(microdata=data_path, input_txt=input_path, vars=c("V0407","V0408"))}
 }
 \seealso{
-\link[POFIBGE]{get_pof} for downloading, labelling, deflating and creating survey design object for POF microdata.\cr \link[POFIBGE]{pof_labeller} for labelling categorical variables from POF microdata.\cr \link[POFIBGE]{pof_deflator} for adding deflator variable to POF microdata.\cr \link[POFIBGE]{pof_design} for creating POF survey design object.\cr \link[POFIBGE]{pof_example} for getting the path of the POF example files.
+\link[POFIBGE]{get_pof} for downloading, labeling, deflating and creating survey design object for POF microdata.\cr \link[POFIBGE]{pof_labeller} for labeling categorical variables from POF microdata.\cr \link[POFIBGE]{pof_deflator} for adding deflator variables to POF microdata.\cr \link[POFIBGE]{pof_design} for creating POF survey design object.\cr \link[POFIBGE]{pof_example} for getting the path of the POF toy example files.
 }

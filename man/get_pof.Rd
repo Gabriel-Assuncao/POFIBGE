@@ -26,14 +26,14 @@ get_pof(
 
 \item{labels}{Logical value. If \code{TRUE}, categorical variables will presented as factors with labels corresponding to the survey's dictionary.}
 
-\item{deflator}{Logical value. If \code{TRUE}, deflator variable will be available for use in the microdata.}
+\item{deflator}{Logical value. If \code{TRUE}, deflator variables will be available for use in the microdata.}
 
-\item{design}{Logical value. If \code{TRUE}, will return an object of class \code{survey.design}. It is strongly recommended to keep this parameter as \code{TRUE} for further analysis. If \code{FALSE}, only the microdata will be returned.}
+\item{design}{Logical value. If \code{TRUE}, will return an object of class \code{survey.design} or \code{svyrep.design}. It is strongly recommended to keep this parameter as \code{TRUE} for further analysis. If \code{FALSE}, only the microdata will be returned.}
 
 \item{savedir}{Directory to save the downloaded data. Default is to use a temporary directory.}
 }
 \value{
-An object of class \code{survey.design} with the data from POF and its sample design, or a tibble with selected variables of the microdata, including the necessary survey design ones.
+An object of class \code{survey.design} or \code{svyrep.design} with the data from POF and its sample design, or a tibble with selected variables of the microdata, including the necessary survey design ones.
 }
 \description{
 Core function of package. With this function only, the user can download a POF microdata from a year and get a sample design object ready to use with \code{survey} package functions.
@@ -57,5 +57,5 @@ pof.svy3 <- get_pof(year=2017, selected=FALSE, anthropometry=TRUE, vars=c("V7102
 if (!is.null(pof.svy3)) survey::svymean(x=~V7104, design=pof.svy3, na.rm=TRUE)}
 }
 \seealso{
-\link[POFIBGE]{read_pof} for reading POF microdata.\cr \link[POFIBGE]{pof_labeller} for labelling categorical variables from POF microdata.\cr \link[POFIBGE]{pof_deflator} for adding deflator variable to POF microdata.\cr \link[POFIBGE]{pof_design} for creating POF survey design object.\cr \link[POFIBGE]{pof_example} for getting the path of the POF example files.
+\link[POFIBGE]{read_pof} for reading POF microdata.\cr \link[POFIBGE]{pof_labeller} for labeling categorical variables from POF microdata.\cr \link[POFIBGE]{pof_deflator} for adding deflator variables to POF microdata.\cr \link[POFIBGE]{pof_design} for creating POF survey design object.\cr \link[POFIBGE]{pof_example} for getting the path of the POF toy example files.
 }

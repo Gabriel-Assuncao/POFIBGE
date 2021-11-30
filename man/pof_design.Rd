@@ -10,7 +10,7 @@ pof_design(data_pof)
 \item{data_pof}{A tibble of POF microdata read with \code{read_pof} function.}
 }
 \value{
-An object of class \code{survey.design} with the data from POF and its sample design.
+An object of class \code{survey.design} or \code{svyrep.design} with the data from POF and its sample design.
 }
 \description{
 This function creates POF survey object with its sample design for analysis using \code{survey} package functions.
@@ -41,5 +41,5 @@ pof.svy2 <- pof_design(data_pof=pof.df2)
 if (!is.null(pof.svy2)) survey::svymean(x=~V0408, design=pof.svy2, na.rm=TRUE)}
 }
 \seealso{
-\link[POFIBGE]{get_pof} for downloading, labelling, deflating and creating survey design object for POF microdata.\cr \link[POFIBGE]{read_pof} for reading POF microdata.\cr \link[POFIBGE]{pof_labeller} for labelling categorical variables from POF microdata.\cr \link[POFIBGE]{pof_deflator} for adding deflator variable to POF microdata.\cr \link[POFIBGE]{pof_example} for getting the path of the POF example files.
+\link[POFIBGE]{get_pof} for downloading, labeling, deflating and creating survey design object for POF microdata.\cr \link[POFIBGE]{read_pof} for reading POF microdata.\cr \link[POFIBGE]{pof_labeller} for labeling categorical variables from POF microdata.\cr \link[POFIBGE]{pof_deflator} for adding deflator variables to POF microdata.\cr \link[POFIBGE]{pof_example} for getting the path of the POF toy example files.
 }

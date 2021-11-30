@@ -1,17 +1,17 @@
 #' Download, label, deflate and create survey design object for POF microdata
 #' @description Core function of package. With this function only, the user can download a POF microdata from a year and get a sample design object ready to use with \code{survey} package functions.
-#' @import survey readr dplyr magrittr projmgr httr RCurl utils timeDate readxl tibble
+#' @import dplyr httr magrittr projmgr RCurl readr readxl survey tibble timeDate utils
 #' @param year The year of the data to be downloaded. Must be a number equal to 2008 or 2017. Vector not accepted.
 #' @param selected Logical value. If \code{TRUE}, the specific questionnaire for selected resident will be used. If \code{FALSE}, the basic questionnaire for household and residents will be used.
 #' @param anthropometry Logical value. If \code{TRUE}, the specific questionnaire for the anthropometry module of the selected resident will be used. If \code{FALSE}, the questionnaire defined by the argument \code{selected} of this function will be used. This argument will be used only if \code{year} is equal to 2017.
 #' @param vars Vector of variable names to be kept for analysis. Default is to keep all variables.
 #' @param labels Logical value. If \code{TRUE}, categorical variables will presented as factors with labels corresponding to the survey's dictionary.
-#' @param deflator Logical value. If \code{TRUE}, deflator variable will be available for use in the microdata.
-#' @param design Logical value. If \code{TRUE}, will return an object of class \code{survey.design}. It is strongly recommended to keep this parameter as \code{TRUE} for further analysis. If \code{FALSE}, only the microdata will be returned.
+#' @param deflator Logical value. If \code{TRUE}, deflator variables will be available for use in the microdata.
+#' @param design Logical value. If \code{TRUE}, will return an object of class \code{survey.design} or \code{svyrep.design}. It is strongly recommended to keep this parameter as \code{TRUE} for further analysis. If \code{FALSE}, only the microdata will be returned.
 #' @param savedir Directory to save the downloaded data. Default is to use a temporary directory.
-#' @return An object of class \code{survey.design} with the data from POF and its sample design, or a tibble with selected variables of the microdata, including the necessary survey design ones.
+#' @return An object of class \code{survey.design} or \code{svyrep.design} with the data from POF and its sample design, or a tibble with selected variables of the microdata, including the necessary survey design ones.
 #' @note For more information, visit the survey official website <\url{https://www.ibge.gov.br/estatisticas/sociais/trabalho/9050-pesquisa-de-orcamentos-familiares.html?=&t=o-que-e}> and consult the other functions of this package, described below.
-#' @seealso \link[POFIBGE]{read_pof} for reading POF microdata.\cr \link[POFIBGE]{pof_labeller} for labelling categorical variables from POF microdata.\cr \link[POFIBGE]{pof_deflator} for adding deflator variable to POF microdata.\cr \link[POFIBGE]{pof_design} for creating POF survey design object.\cr \link[POFIBGE]{pof_example} for getting the path of the POF example files.
+#' @seealso \link[POFIBGE]{read_pof} for reading POF microdata.\cr \link[POFIBGE]{pof_labeller} for labeling categorical variables from POF microdata.\cr \link[POFIBGE]{pof_deflator} for adding deflator variables to POF microdata.\cr \link[POFIBGE]{pof_design} for creating POF survey design object.\cr \link[POFIBGE]{pof_example} for getting the path of the POF toy example files.
 #' @examples
 #' \donttest{
 #' pof.svy <- get_pof(year=2017, selected=FALSE, anthropometry=FALSE, vars=c("V0407","V0408"),

@@ -2,7 +2,7 @@
 % Please edit documentation in R/pof_deflator.R
 \name{pof_deflator}
 \alias{pof_deflator}
-\title{Add deflator variable to POF microdata}
+\title{Add deflator variables to POF microdata}
 \usage{
 pof_deflator(data_pof, deflator.file)
 }
@@ -12,10 +12,10 @@ pof_deflator(data_pof, deflator.file)
 \item{deflator.file}{The deflator file for selected survey available on official website: (select the deflator zip file at the general documentation folder) - \url{https://ftp.ibge.gov.br/Orcamentos_Familiares/}.}
 }
 \value{
-A tibble with the data provided from POF survey and the deflator variable added for use.
+A tibble with the data provided from POF survey and the deflator variables added for use.
 }
 \description{
-This function adds deflator variable to POF microdata. For deflation of income variables, the documentation provided through the following address must be used: (see the file 'POFIBGE_Deflator.pdf' at the general documentation folder) - \url{https://ftp.ibge.gov.br/Orcamentos_Familiares/}.
+This function adds deflator variables to POF microdata. For deflation of income variables, the documentation provided through the following address must be used: (see the file 'POFIBGE_Deflator.pdf' at the general documentation folder) - \url{https://ftp.ibge.gov.br/Orcamentos_Familiares/}.
 }
 \note{
 For more information, visit the survey official website <\url{https://www.ibge.gov.br/estatisticas/sociais/trabalho/9050-pesquisa-de-orcamentos-familiares.html?=&t=o-que-e}> and consult the other functions of this package, described below.
@@ -38,5 +38,5 @@ deflator.path2 <- pof_example(path="deflatorexample.xls")
 pof.df2 <- pof_deflator(data_pof=pof.df2, deflator.file=deflator.path2)}
 }
 \seealso{
-\link[POFIBGE]{get_pof} for downloading, labelling, deflating and creating survey design object for POF microdata.\cr \link[POFIBGE]{read_pof} for reading POF microdata.\cr \link[POFIBGE]{pof_labeller} for labelling categorical variables from POF microdata.\cr \link[POFIBGE]{pof_design} for creating POF survey design object.\cr \link[POFIBGE]{pof_example} for getting the path of the POF example files.
+\link[POFIBGE]{get_pof} for downloading, labeling, deflating and creating survey design object for POF microdata.\cr \link[POFIBGE]{read_pof} for reading POF microdata.\cr \link[POFIBGE]{pof_labeller} for labeling categorical variables from POF microdata.\cr \link[POFIBGE]{pof_design} for creating POF survey design object.\cr \link[POFIBGE]{pof_example} for getting the path of the POF toy example files.
 }

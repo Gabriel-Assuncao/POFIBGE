@@ -1,7 +1,7 @@
-﻿# POFIBGE
-## Downloading, Reading and Analysing POF Microdata
+# POFIBGE
+## Downloading, Reading and Analyzing POF Microdata
 
-This R package provides tools for download, read, and analyse the POF	household survey from Brazilian Institute of Geography and Statistics.
+This R package provides tools for download, read, and analyze the POF	household survey from Brazilian Institute of Geography and Statistics.
 
 ## Baixe, Leia e Analise os Microdados da POF
 

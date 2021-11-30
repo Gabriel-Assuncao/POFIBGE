@@ -1,10 +1,10 @@
 #' Create POF survey object with its sample design
 #' @description This function creates POF survey object with its sample design for analysis using \code{survey} package functions.
-#' @import survey readr dplyr magrittr projmgr httr RCurl utils timeDate readxl tibble
+#' @import dplyr httr magrittr projmgr RCurl readr readxl survey tibble timeDate utils
 #' @param data_pof A tibble of POF microdata read with \code{read_pof} function.
-#' @return An object of class \code{survey.design} with the data from POF and its sample design.
+#' @return An object of class \code{survey.design} or \code{svyrep.design} with the data from POF and its sample design.
 #' @note For more information, visit the survey official website <\url{https://www.ibge.gov.br/estatisticas/sociais/trabalho/9050-pesquisa-de-orcamentos-familiares.html?=&t=o-que-e}> and consult the other functions of this package, described below.
-#' @seealso \link[POFIBGE]{get_pof} for downloading, labelling, deflating and creating survey design object for POF microdata.\cr \link[POFIBGE]{read_pof} for reading POF microdata.\cr \link[POFIBGE]{pof_labeller} for labelling categorical variables from POF microdata.\cr \link[POFIBGE]{pof_deflator} for adding deflator variable to POF microdata.\cr \link[POFIBGE]{pof_example} for getting the path of the POF example files.
+#' @seealso \link[POFIBGE]{get_pof} for downloading, labeling, deflating and creating survey design object for POF microdata.\cr \link[POFIBGE]{read_pof} for reading POF microdata.\cr \link[POFIBGE]{pof_labeller} for labeling categorical variables from POF microdata.\cr \link[POFIBGE]{pof_deflator} for adding deflator variables to POF microdata.\cr \link[POFIBGE]{pof_example} for getting the path of the POF toy example files.
 #' @examples
 #' \donttest{
 #' # Using data read from disk

@@ -1,11 +1,11 @@
 #' Label categorical variables from POF microdata
 #' @description This function labels categorical variables from POF microdata.
-#' @import survey readr dplyr magrittr projmgr httr RCurl utils timeDate readxl tibble
+#' @import dplyr httr magrittr projmgr RCurl readr readxl survey tibble timeDate utils
 #' @param data_pof A tibble of POF microdata read with \code{read_pof} function.
 #' @param dictionary.file The dictionary file for selected survey available on official website: (select the dictionary and input zip file, according to the appropriated select the dictionary and input zip file, according to the appropriated year, microdata folder and then, inside, documentation) - \url{https://ftp.ibge.gov.br/Orcamentos_Familiares/}.
 #' @return A tibble with the data provided from POF survey and its categorical variables as factors with related labels.
 #' @note For more information, visit the survey official website <\url{https://www.ibge.gov.br/estatisticas/sociais/trabalho/9050-pesquisa-de-orcamentos-familiares.html?=&t=o-que-e}> and consult the other functions of this package, described below.
-#' @seealso \link[POFIBGE]{get_pof} for downloading, labelling, deflating and creating survey design object for POF microdata.\cr \link[POFIBGE]{read_pof} for reading POF microdata.\cr \link[POFIBGE]{pof_deflator} for adding deflator variable to POF microdata.\cr \link[POFIBGE]{pof_design} for creating POF survey design object.\cr \link[POFIBGE]{pof_example} for getting the path of the POF example files.
+#' @seealso \link[POFIBGE]{get_pof} for downloading, labeling, deflating and creating survey design object for POF microdata.\cr \link[POFIBGE]{read_pof} for reading POF microdata.\cr \link[POFIBGE]{pof_deflator} for adding deflator variables to POF microdata.\cr \link[POFIBGE]{pof_design} for creating POF survey design object.\cr \link[POFIBGE]{pof_example} for getting the path of the POF toy example files.
 #' @examples
 #' \donttest{
 #' # Using data read from disk
@@ -92,7 +92,7 @@ pof_labeller <- function(data_pof, dictionary.file) {
     }
   }
   else {
-    message("The microdata object is not of the tibble class or sample design was already defined for microdata, so labelling categorical variables is not possible.")
+    message("The microdata object is not of the tibble class or sample design was already defined for microdata, so labeling categorical variables is not possible.")
   }
   return(data_pof)
 }
